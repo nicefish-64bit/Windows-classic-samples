@@ -923,7 +923,7 @@ int PASCAL wWinMain(HINSTANCE hInstance,
     wcex.cbWndExtra = sizeof(LPVOID);
     wcex.hIcon = LoadIcon(g_hInstance, MAKEINTRESOURCE(IDI_APPICON));
     wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
-    wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW+1);
+	wcex.hbrBackground = CreateSolidBrush(RGB(0, 0, 0)); // TODO free me
     wcex.lpszClassName = szWindowClass;
     wcex.hIconSm = (HICON)LoadImage(g_hInstance, MAKEINTRESOURCE(IDI_APPICON),
                                   IMAGE_ICON,

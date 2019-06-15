@@ -610,9 +610,9 @@ UINT Main_OnNCHitTest(HWND hwnd, int x, int y)
 
 void Main_OnPaint(HWND hwnd)
 {
-    POPTIONS pOpt = GetAppbarData(hwnd);
-    HFONT hfont = NULL;
-    int x = 0, y = 0;
+    //POPTIONS pOpt = GetAppbarData(hwnd);
+    //HFONT hfont = NULL;
+    //int x = 0, y = 0;
 
     // Get the client rect
     RECT rc;
@@ -622,29 +622,33 @@ void Main_OnPaint(HWND hwnd)
     PAINTSTRUCT ps;
     HDC hdc = BeginPaint(hwnd, &ps);
 
-    // Figure out which side we're on so we can adjust the text accordingly
-    switch (pOpt->uSide)
-    {
-        case ABE_TOP:
-        case ABE_BOTTOM:
-            hfont = (HFONT)SelectObject(hdc, s_hFontTop);
-            x = 2;
-            y = 2;
-            break;
+	SelectBrush(hdc, CreateSolidBrush(RGB(0, 255, 0)));
 
-        case ABE_LEFT:
-        case ABE_RIGHT:
-            hfont = (HFONT)SelectObject(hdc, s_hFontLeft);
-            x = rc.right - 2;
-            y = 2;
-            break;
-    }
+	Rectangle(hdc, 0, 0, 100, 3);
 
-    // Draw the text and clean up
-    ExtTextOut(hdc, x, y, ETO_OPAQUE, NULL, L"Right Click for Options",
-               lstrlen(L"Right Click for Options"), NULL);
+    //// Figure out which side we're on so we can adjust the text accordingly
+    //switch (pOpt->uSide)
+    //{
+    //    case ABE_TOP:
+    //    case ABE_BOTTOM:
+    //        hfont = (HFONT)SelectObject(hdc, s_hFontTop);
+    //        x = 2;
+    //        y = 2;
+    //        break;
 
-    SelectObject(hdc, hfont);
+    //    case ABE_LEFT:
+    //    case ABE_RIGHT:
+    //        hfont = (HFONT)SelectObject(hdc, s_hFontLeft);
+    //        x = rc.right - 2;
+    //        y = 2;
+    //        break;
+    //}
+
+    //// Draw the text and clean up
+    //ExtTextOut(hdc, x, y, ETO_OPAQUE, NULL, L"Right Click for Options",
+    //           lstrlen(L"Right Click for Options"), NULL);
+
+    //SelectObject(hdc, hfont);
     EndPaint(hwnd, &ps);
 }
 
