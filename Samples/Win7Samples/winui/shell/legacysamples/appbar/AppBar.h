@@ -10,7 +10,7 @@
 //////////////////////////////////////////////////////////////////////////////
 // Constants and Enumerations
 
-#define OVERRIDE_HEIGHT 3
+#define OVERRIDE_HEIGHT 1
 
 #define CX_DEFWIDTH     80
 #define CY_DEFHEIGHT    OVERRIDE_HEIGHT

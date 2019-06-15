@@ -642,7 +642,7 @@ void Main_OnPaint(HWND hwnd)
 	SelectBrush(hdc, CreateSolidBrush(RGB(255, 102, 153))); // TODO free me
 
 	// idk, + 100 just to be safe.
-	Rectangle(hdc, 0, 0, static_cast<int>((fraction / 10.0) * (rc.right - rc.left)), OVERRIDE_HEIGHT + 100);
+	Rectangle(hdc, 0, -1, static_cast<int>((fraction / 10.0) * (rc.right - rc.left)), OVERRIDE_HEIGHT + 100);
 
     //// Figure out which side we're on so we can adjust the text accordingly
     //switch (pOpt->uSide)
