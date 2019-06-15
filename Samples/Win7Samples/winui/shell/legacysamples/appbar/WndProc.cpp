@@ -85,6 +85,10 @@ LRESULT CALLBACK MainWndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             lResult = 0;
             break;
 
+		case WM_NCCALCSIZE:
+			lResult = 0;
+			break;
+
         default:                // Pass message on for default proccessing
             lResult = DefWindowProc( hwnd, uMsg, wParam, lParam );
             break;
@@ -145,6 +149,18 @@ BOOL Main_OnCreate(HWND hwnd, LPCREATESTRUCT /* lpCreateStruct */)
 
     lf.lfEscapement = 0;
     s_hFontTop = CreateFontIndirect(&lf);
+
+	{
+		RECT rcClient;
+		GetWindowRect(hwnd, &rcClient);
+
+		// Inform the application of the frame change.
+		SetWindowPos(hwnd,
+			NULL,
+			rcClient.left, rcClient.top,
+			rcClient.right - rcClient.left, rcClient.bottom - rcClient.top,
+			SWP_FRAMECHANGED);
+	}
 
     return TRUE;
 }
