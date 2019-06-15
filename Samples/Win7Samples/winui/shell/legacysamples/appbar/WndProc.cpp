@@ -622,7 +622,7 @@ void Main_OnPaint(HWND hwnd)
     PAINTSTRUCT ps;
     HDC hdc = BeginPaint(hwnd, &ps);
 
-	SelectBrush(hdc, CreateSolidBrush(RGB(0, 255, 0)));
+	SelectBrush(hdc, CreateSolidBrush(RGB(255, 102, 153))); // TODO free me
 
 	Rectangle(hdc, 0, 0, 100, 3);
 
