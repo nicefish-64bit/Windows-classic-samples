@@ -12,7 +12,8 @@
 #include <strsafe.h>
 #include "resource.h"
 #include "appbar.h"
-
+#include <chrono>
+#include <ctime>
 
 //////////////////////////////////////////////////////////////////////////////
 // Local prototypes
@@ -621,11 +622,11 @@ UINT Main_OnNCHitTest(HWND hwnd, int x, int y)
 
 void Main_OnPaint(HWND hwnd)
 {
-	static int fraction = 0;
-	++fraction;
-	if (fraction > 10) {
-		fraction = 0;
-	}
+	//static int fraction = 0;
+	//++fraction;
+	//if (fraction > 10) {
+	//	fraction = 0;
+	//}
 
     //POPTIONS pOpt = GetAppbarData(hwnd);
     //HFONT hfont = NULL;
@@ -641,8 +642,30 @@ void Main_OnPaint(HWND hwnd)
 
 	SelectBrush(hdc, CreateSolidBrush(RGB(255, 102, 153))); // TODO free me
 
+	double percent{};
+	{
+		std::tm tm_end{};
+		tm_end.tm_year = 2019 - 1900;
+		tm_end.tm_mon = 9 - 1;
+		tm_end.tm_mday = 4;
+
+		auto tp_end = std::chrono::system_clock::from_time_t(std::mktime(&tm_end));
+
+		std::tm tm_start{};
+		tm_start.tm_year = 2019 - 1900;
+		tm_start.tm_mon = 6 - 1;
+		tm_start.tm_mday = 14;
+
+		auto tp_start = std::chrono::system_clock::from_time_t(std::mktime(&tm_start));
+
+		auto ms_total = static_cast<double>(std::chrono::duration_cast<std::chrono::milliseconds>(tp_end - tp_start).count());
+		auto ms_elapsed = static_cast<double>(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now() - tp_start).count());
+
+		percent = ms_elapsed / ms_total;
+	}
+
 	// idk, + 100 just to be safe.
-	Rectangle(hdc, 0, -1, static_cast<int>((fraction / 10.0) * (rc.right - rc.left)), OVERRIDE_HEIGHT + 100);
+	Rectangle(hdc, 0, -10, static_cast<int>(percent * (rc.right - rc.left)), OVERRIDE_HEIGHT + 100);
 
     //// Figure out which side we're on so we can adjust the text accordingly
     //switch (pOpt->uSide)
