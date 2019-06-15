@@ -163,7 +163,7 @@ BOOL Main_OnCreate(HWND hwnd, LPCREATESTRUCT /* lpCreateStruct */)
 			SWP_FRAMECHANGED);
 	}
 
-	SetTimer(hwnd, IDT_REPAINT, 200, nullptr);
+	SetTimer(hwnd, IDT_REPAINT, 60000, nullptr); // repaint every minute
 
 	// maximizing chrome will draw something over us if we don't set on top
 	AppBar_SetAlwaysOnTop(hwnd, true);
