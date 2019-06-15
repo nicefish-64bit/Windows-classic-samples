@@ -11,7 +11,7 @@
 // Constants and Enumerations
 
 #define CX_DEFWIDTH     80
-#define CY_DEFHEIGHT    60
+#define CY_DEFHEIGHT    2
 
 #define IDT_AUTOHIDE    1
 #define IDT_AUTOUNHIDE  2

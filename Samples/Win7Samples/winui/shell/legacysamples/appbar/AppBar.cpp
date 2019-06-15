@@ -55,6 +55,8 @@ void AppBar_Size(HWND hwnd)
 
         RECT rc;
         GetWindowRect(hwnd, &rc);
+		rc.top = 0;
+		rc.bottom = 2;
         AppBar_QuerySetPos(pOpt->uSide, &rc, &abd, TRUE);
     }
 }
@@ -240,6 +242,8 @@ void AppBar_PosChanged(PAPPBARDATA pabd)
     // Now get the current window rectangle and find the height and width
     RECT rcWindow;
     GetWindowRect(pabd->hWnd, &rcWindow);
+	rcWindow.top = 0;
+	rcWindow.bottom = 2;
     int iHeight = rcWindow.bottom - rcWindow.top;
     int iWidth = rcWindow.right - rcWindow.left;
 
