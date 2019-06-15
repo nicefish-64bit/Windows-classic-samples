@@ -648,20 +648,24 @@ void Main_OnPaint(HWND hwnd)
 		tm_end.tm_year = 2019 - 1900;
 		tm_end.tm_mon = 9 - 1;
 		tm_end.tm_mday = 4;
+		tm_end.tm_isdst = -1;
 
-		auto tp_end = std::chrono::system_clock::from_time_t(std::mktime(&tm_end));
+		auto ts_end = static_cast<std::chrono::seconds>(std::mktime(&tm_end)).count();
 
 		std::tm tm_start{};
 		tm_start.tm_year = 2019 - 1900;
 		tm_start.tm_mon = 6 - 1;
 		tm_start.tm_mday = 14;
+		tm_start.tm_isdst = -1;
 
-		auto tp_start = std::chrono::system_clock::from_time_t(std::mktime(&tm_start));
+		auto ts_start = static_cast<std::chrono::seconds>(std::mktime(&tm_start)).count();
 
-		auto ms_total = static_cast<double>(std::chrono::duration_cast<std::chrono::milliseconds>(tp_end - tp_start).count());
-		auto ms_elapsed = static_cast<double>(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now() - tp_start).count());
+		auto ts_now = static_cast<std::chrono::seconds>(std::time(nullptr)).count();
 
-		percent = ms_elapsed / ms_total;
+		auto ms_total = ts_end - ts_start;
+		auto ms_elapsed = ts_now - ts_start;
+
+		percent = static_cast<double>(ms_elapsed) / ms_total;
 	}
 
 	// idk, + 100 just to be safe.
