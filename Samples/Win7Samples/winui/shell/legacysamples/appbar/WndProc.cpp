@@ -164,6 +164,9 @@ BOOL Main_OnCreate(HWND hwnd, LPCREATESTRUCT /* lpCreateStruct */)
 
 	SetTimer(hwnd, IDT_REPAINT, 200, nullptr);
 
+	// maximizing chrome will draw something over us if we don't set on top
+	AppBar_SetAlwaysOnTop(hwnd, true);
+
     return TRUE;
 }
 
