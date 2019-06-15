@@ -10,11 +10,14 @@
 //////////////////////////////////////////////////////////////////////////////
 // Constants and Enumerations
 
+#define OVERRIDE_HEIGHT 3
+
 #define CX_DEFWIDTH     80
-#define CY_DEFHEIGHT    2
+#define CY_DEFHEIGHT    OVERRIDE_HEIGHT
 
 #define IDT_AUTOHIDE    1
 #define IDT_AUTOUNHIDE  2
+#define IDT_REPAINT     3
 
 #define APPBAR_TOP      0
 #define APPBAR_BOTTOM   1

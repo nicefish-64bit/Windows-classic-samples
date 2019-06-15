@@ -162,6 +162,8 @@ BOOL Main_OnCreate(HWND hwnd, LPCREATESTRUCT /* lpCreateStruct */)
 			SWP_FRAMECHANGED);
 	}
 
+	SetTimer(hwnd, IDT_REPAINT, 200, nullptr);
+
     return TRUE;
 }
 
@@ -542,6 +544,12 @@ void Main_OnTimer(HWND hwnd, UINT id)
             }
             break;
         }
+
+		case IDT_REPAINT:
+		{
+			RedrawWindow(hwnd, nullptr, nullptr, RDW_INVALIDATE);
+			break;
+		}
     }
 }
 
@@ -610,6 +618,12 @@ UINT Main_OnNCHitTest(HWND hwnd, int x, int y)
 
 void Main_OnPaint(HWND hwnd)
 {
+	static int fraction = 0;
+	++fraction;
+	if (fraction > 10) {
+		fraction = 0;
+	}
+
     //POPTIONS pOpt = GetAppbarData(hwnd);
     //HFONT hfont = NULL;
     //int x = 0, y = 0;
@@ -624,7 +638,8 @@ void Main_OnPaint(HWND hwnd)
 
 	SelectBrush(hdc, CreateSolidBrush(RGB(255, 102, 153))); // TODO free me
 
-	Rectangle(hdc, 0, 0, 100, 3);
+	// idk, + 100 just to be safe.
+	Rectangle(hdc, 0, 0, static_cast<int>((fraction / 10.0) * (rc.right - rc.left)), OVERRIDE_HEIGHT + 100);
 
     //// Figure out which side we're on so we can adjust the text accordingly
     //switch (pOpt->uSide)

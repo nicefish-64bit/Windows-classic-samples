@@ -56,7 +56,7 @@ void AppBar_Size(HWND hwnd)
         RECT rc;
         GetWindowRect(hwnd, &rc);
 		rc.top = 0;
-		rc.bottom = 2;
+		rc.bottom = OVERRIDE_HEIGHT;
         AppBar_QuerySetPos(pOpt->uSide, &rc, &abd, TRUE);
     }
 }
@@ -243,7 +243,7 @@ void AppBar_PosChanged(PAPPBARDATA pabd)
     RECT rcWindow;
     GetWindowRect(pabd->hWnd, &rcWindow);
 	rcWindow.top = 0;
-	rcWindow.bottom = 2;
+	rcWindow.bottom = OVERRIDE_HEIGHT;
     int iHeight = rcWindow.bottom - rcWindow.top;
     int iWidth = rcWindow.right - rcWindow.left;
 
