@@ -669,7 +669,7 @@ void Main_OnPaint(HWND hwnd)
 	}
 
 	// idk, + 100 just to be safe.
-	Rectangle(hdc, 0, -10, static_cast<int>(percent * (rc.right - rc.left)), OVERRIDE_HEIGHT + 100);
+	Rectangle(hdc, -10, -10, static_cast<int>(percent * (rc.right - rc.left)), OVERRIDE_HEIGHT + 100);
 
     //// Figure out which side we're on so we can adjust the text accordingly
     //switch (pOpt->uSide)
